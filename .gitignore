@@ -8,3 +8,11 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
+genericrepository/src/.DS_Store
+genericrepository/.DS_Store
+genericrepository/.classpath
+genericrepository/.project
+genericrepository/.settings/org.eclipse.core.resources.prefs
+genericrepository/.settings/org.eclipse.jdt.core.prefs
+genericrepository/.settings/org.eclipse.m2e.core.prefs
+.DS_Store
