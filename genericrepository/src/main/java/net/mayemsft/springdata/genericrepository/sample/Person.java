@@ -50,6 +50,7 @@ public class Person {
 	private static ByteBuffer loadPic() {
 		try {
 			String file = Person.class.getClassLoader().getResource("new_logo.png").getFile();
+//			System.out.println(file);
 			RandomAccessFile aFile = new RandomAccessFile(file, "r");
 			FileChannel inChannel = aFile.getChannel();
 			MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, 0, inChannel.size());
@@ -78,7 +79,5 @@ public class Person {
 		return new Person(id, name, age, loadPic());
 	}
 
-	public static void main(String[] args) {
 
-	}
 }

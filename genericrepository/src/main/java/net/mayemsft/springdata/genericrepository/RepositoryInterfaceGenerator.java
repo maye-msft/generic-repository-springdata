@@ -22,8 +22,8 @@ public class RepositoryInterfaceGenerator<Entity, ID> {
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	Repository<Entity, ID> genQueryRepository(Class<Entity> cls, Class<ID> id, String methodName, Class<?>... paramTypes) throws Exception {
-		Class<?> repoCls = this.genQueryCode(cls, id, methodName, paramTypes);
+	Repository<Entity, ID> genQueryRepository(Class<Entity> cls, Class<ID> id, String methodName, boolean multiple, Class<?>... paramTypes) throws Exception {
+		Class<?> repoCls = this.genQueryCode(cls, id, methodName, multiple, paramTypes);
 		return (Repository<Entity, ID>) makeRepositoryInstance(repoCls);
 	}
 	
@@ -34,7 +34,7 @@ public class RepositoryInterfaceGenerator<Entity, ID> {
 	}
 
 	
-	private Class<?> genQueryCode(Class<Entity> cls, Class<ID> id, String methodName, Class<?>... paramTypes) throws Exception {
+	private Class<?> genQueryCode(Class<Entity> cls, Class<ID> id, String methodName, boolean multiple, Class<?>... paramTypes) throws Exception {
 		Package pkg = cls.getPackage();
 		StringBuilder sourceCode = new StringBuilder();
 		
@@ -51,7 +51,11 @@ public class RepositoryInterfaceGenerator<Entity, ID> {
 		
 		sourceCode.append("public interface " + className + " extends "+interfaceClass.getSimpleName()+"<"+ cls.getSimpleName()+", "+id.getSimpleName()+"> {\n");
 		sourceCode.append("   @AllowFiltering\n");
-		sourceCode.append("   "+cls.getSimpleName()+" "+methodName+"(");
+		if(multiple) {
+			sourceCode.append("   Iterable<"+cls.getSimpleName()+"> "+methodName+"(");
+		} else {
+			sourceCode.append("   "+cls.getSimpleName()+" "+methodName+"(");
+		}
 		for (int i=0;i<paramTypes.length;i++) {
 			if(i>0) {
 				sourceCode.append(", ");

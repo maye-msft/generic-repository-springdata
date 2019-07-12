@@ -1,6 +1,5 @@
 package net.mayemsft.springdata.genericrepository;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -24,21 +23,22 @@ public abstract class AbstractRepositoryHelper<T, ID> implements IRepositoryHelp
 		this.crudRepsitory = this.repogenerator.genCrudRepository(cls, id);
 	}
 	
-	private Object invoke(Repository<T, ID> repository, String methodName, List<Object> params, Class<?>... paramTypes ) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private Object invoke(Repository<T, ID> repository, String methodName, List<Object> params, Class<?>... paramTypes )   throws Exception  {
 		Method method = repository.getClass().getMethod(methodName, paramTypes);
 		return method.invoke(repository, params.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
 	public T queryOne(String methodName, List<Object> params, Class<?>... paramTypes) throws Exception {
-		Repository<T, ID> repository = this.repogenerator.genQueryRepository(cls, id, methodName, paramTypes);
+		Repository<T, ID> repository = this.repogenerator.genQueryRepository(cls, id, methodName, false, paramTypes);
 		return (T)this.invoke(repository, methodName, params, paramTypes);
 
 	}
 
-	public Iterable<T> queryList(String methodName, List<Object> params, Class<?>... paramTypes) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public Iterable<T> queryList(String methodName, List<Object> params, Class<?>... paramTypes)   throws Exception {
+		Repository<T, ID> repository = this.repogenerator.genQueryRepository(cls, id, methodName, true, paramTypes);
+		return (Iterable<T>) this.invoke(repository, methodName, params, paramTypes);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -47,53 +47,52 @@ public abstract class AbstractRepositoryHelper<T, ID> implements IRepositoryHelp
 		return (S)this.invoke(this.crudRepsitory, "save", Arrays.asList(new Object[]{entity}), Object.class);
 	}
 
-	public <S extends T> Iterable<S> saveAll(Iterable<S> entities) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public <S extends T> Iterable<S> saveAll(Iterable<S> entities)   throws Exception {
+		return (Iterable<S>) this.invoke(this.crudRepsitory, "saveAll", Arrays.asList(new Object[]{entities}), Iterable.class);
 	}
 
 	@SuppressWarnings("unchecked")
 	public Optional<T> findById(ID id)  throws Exception {
-		return (Optional<T>)this.invoke(this.crudRepsitory, "findById", Arrays.asList(new Object[]{id}), id.getClass());
+		return (Optional<T>)this.invoke(this.crudRepsitory, "findById", Arrays.asList(new Object[]{id}), Object.class);
 	}
 
-	public boolean existsById(ID id) {
-		// TODO Auto-generated method stub
-		return false;
+	
+	public boolean existsById(ID id)   throws Exception {
+		return (boolean)this.invoke(this.crudRepsitory, "existsById", Arrays.asList(new Object[]{id}), Object.class);
 	}
 
-	public Iterable<T> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public Iterable<T> findAll()   throws Exception {
+		return (Iterable<T>)this.invoke(this.crudRepsitory, "findAll", Arrays.asList(new Object[]{}));
 	}
 
-	public Iterable<T> findAllById(Iterable<ID> ids) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public Iterable<T> findAllById(Iterable<ID> ids)   throws Exception  {
+		return (Iterable<T>) this.invoke(this.crudRepsitory, "findAllById", Arrays.asList(new Object[]{ids}), Iterable.class);
 	}
 
-	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long count()   throws Exception  {
+		return (Long)this.invoke(this.crudRepsitory, "count", Arrays.asList(new Object[]{}));
 	}
 
-	public void deleteById(ID id) {
-		// TODO Auto-generated method stub
+	public void deleteById(ID id)   throws Exception  {
+		this.invoke(this.crudRepsitory, "deleteById", Arrays.asList(new Object[]{id}), Object.class);
 		
 	}
 
-	public void delete(T entity) {
-		// TODO Auto-generated method stub
+	public void delete(T entity)   throws Exception  {
+		this.invoke(this.crudRepsitory, "delete", Arrays.asList(new Object[]{entity}), Object.class);
 		
 	}
 
-	public void deleteAll(Iterable<? extends T> entities) {
-		// TODO Auto-generated method stub
+	public void deleteAll(Iterable<? extends T> entities)   throws Exception {
+		this.invoke(this.crudRepsitory, "deleteAll", Arrays.asList(new Object[]{entities}), Iterable.class);
 		
 	}
 
-	public void deleteAll() {
-		// TODO Auto-generated method stub
+	public void deleteAll()   throws Exception {
+		this.invoke(this.crudRepsitory, "deleteAll", Arrays.asList(new Object[]{}));
 		
 	}
 	
