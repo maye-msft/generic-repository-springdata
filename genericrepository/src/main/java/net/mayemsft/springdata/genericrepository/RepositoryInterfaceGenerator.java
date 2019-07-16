@@ -1,5 +1,7 @@
 package net.mayemsft.springdata.genericrepository;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.context.ApplicationContext;
@@ -9,11 +11,15 @@ import org.springframework.data.cassandra.repository.support.CassandraRepository
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.core.support.RepositoryComposition.RepositoryFragments;
 
-public class RepositoryInterfaceGenerator<Entity, ID> {
+class RepositoryInterfaceGenerator<Entity, ID> {
 
 	
 	private Class<? extends Repository<Entity, ID>> interfaceClass;
 	private ApplicationContext context;
+	
+	private Map<String, Repository<Entity, ID>> queryRepos = new HashMap<String, Repository<Entity, ID>>();
+	
+	private Repository<Entity, ID> crudRepo;
 
 	RepositoryInterfaceGenerator(Class<? extends Repository<Entity, ID>> interfaceClass, ApplicationContext context) {
 		this.interfaceClass = interfaceClass;
@@ -23,14 +29,23 @@ public class RepositoryInterfaceGenerator<Entity, ID> {
 	
 	@SuppressWarnings({ "unchecked" })
 	Repository<Entity, ID> genQueryRepository(Class<Entity> cls, Class<ID> id, String methodName, boolean multiple, Class<?>... paramTypes) throws Exception {
-		Class<?> repoCls = this.genQueryCode(cls, id, methodName, multiple, paramTypes);
-		return (Repository<Entity, ID>) makeRepositoryInstance(repoCls);
+		if(!queryRepos.containsKey(methodName)) {
+			Class<?> repoCls = this.genQueryCode(cls, id, methodName, multiple, paramTypes);
+			Repository<Entity, ID> repo = (Repository<Entity, ID>) makeRepositoryInstance(repoCls);
+			queryRepos.put(methodName, repo);
+		} 
+		return queryRepos.get(methodName);
+		
 	}
 	
 	@SuppressWarnings({  "unchecked" })
 	Repository<Entity, ID> genCrudRepository(Class<Entity> cls, Class<ID> id) throws Exception {
-		Class<?> repoCls = this.genCrudCode(cls, id);
-		return (Repository<Entity, ID>) makeRepositoryInstance(repoCls);
+		
+		if(this.crudRepo == null) {
+			Class<?> repoCls = this.genCrudCode(cls, id);
+			this.crudRepo = (Repository<Entity, ID>) makeRepositoryInstance(repoCls);
+		}
+		return this.crudRepo;
 	}
 
 	

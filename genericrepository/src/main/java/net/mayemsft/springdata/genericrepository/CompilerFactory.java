@@ -2,7 +2,7 @@ package net.mayemsft.springdata.genericrepository;
 
 import org.mdkt.compiler.InMemoryJavaCompiler;
 
-public class CompilerFactory {
+class CompilerFactory {
 
 	
 	private CompilerFactory() {

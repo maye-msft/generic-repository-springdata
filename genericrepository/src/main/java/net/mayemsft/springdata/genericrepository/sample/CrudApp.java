@@ -16,21 +16,21 @@ import org.springframework.context.ApplicationContext;
 
 import net.mayemsft.springdata.genericrepository.CrudRepositoryHelper;
 
-
 /**
  * Hello world!
  *
  */
 @SpringBootApplication
-public class App implements CommandLineRunner
+public class CrudApp implements CommandLineRunner
 {
-	private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CrudApp.class);
 	
 	@Autowired
 	private ApplicationContext context;
 
 	public static void main(String[] args) {
-		SpringApplication.run(App.class, args);
+		
+		SpringApplication.run(CrudApp.class, args);
 
 	}
 
@@ -101,14 +101,17 @@ public class App implements CommandLineRunner
 		persons = new ArrayList<Person>();
 		persons.add(person2);
 		persons.add(person3);
+		//delete person2 person3 with deleteAll
 		crudRepositoryHelper.deleteAll(persons);
 		count = crudRepositoryHelper.count();
 		LOGGER.info(count.toString());
 		
+		//delete person4 with delete
 		crudRepositoryHelper.delete(person4);
 		count = crudRepositoryHelper.count();
 		LOGGER.info(count.toString());
 		
+		//delete all with deleteAll
 		crudRepositoryHelper.deleteAll();
 		count = crudRepositoryHelper.count();
 		LOGGER.info(count.toString());

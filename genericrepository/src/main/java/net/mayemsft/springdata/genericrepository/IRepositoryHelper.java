@@ -3,7 +3,7 @@ package net.mayemsft.springdata.genericrepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface IRepositoryHelper<T, ID> {
+interface IRepositoryHelper<T, ID> {
 	/**
 	 * Returns instance of the type.
 	 *
