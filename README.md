@@ -34,7 +34,7 @@ A full sample code is at the package com.github.mayemsft.springdata.genericrepos
 - [CrudApp](https://github.com/maye-msft/generic-repository-springdata/blob/master/genericrepository/src/main/java/com/github/mayemsft/springdata/genericrepository/sample/CrudApp.java)
 - [CassandraApp](https://github.com/maye-msft/generic-repository-springdata/blob/master/genericrepository/src/main/java/com/github/mayemsft/springdata/genericrepository/sample/CassandraApp.java)
 
-** TODO
+## TODO
 - unit test
 - document
 - publish to maven repository
