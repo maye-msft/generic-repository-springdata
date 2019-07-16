@@ -1,4 +1,4 @@
-package net.mayemsft.springdata.genericrepository.sample;
+package com.github.mayemsft.springdata.genericrepository.sample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import net.mayemsft.springdata.genericrepository.CrudRepositoryHelper;
+import com.github.mayemsft.springdata.genericrepository.CrudRepositoryHelper;
 
 /**
  * Hello world!

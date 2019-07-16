@@ -1,4 +1,4 @@
-package net.mayemsft.springdata.genericrepository;
+package com.github.mayemsft.springdata.genericrepository;
 
 import java.util.HashMap;
 import java.util.Map;

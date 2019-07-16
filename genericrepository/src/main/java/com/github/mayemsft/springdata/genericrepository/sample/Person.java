@@ -1,4 +1,4 @@
-package net.mayemsft.springdata.genericrepository.sample;
+package com.github.mayemsft.springdata.genericrepository.sample;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

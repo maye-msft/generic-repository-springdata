@@ -1,4 +1,4 @@
-package net.mayemsft.springdata.genericrepository;
+package com.github.mayemsft.springdata.genericrepository;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.repository.CrudRepository;

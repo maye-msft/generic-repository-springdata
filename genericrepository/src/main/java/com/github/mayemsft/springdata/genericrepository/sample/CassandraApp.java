@@ -1,4 +1,4 @@
-package net.mayemsft.springdata.genericrepository.sample;
+package com.github.mayemsft.springdata.genericrepository.sample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.cassandra.core.query.CassandraPageRequest;
 
-import net.mayemsft.springdata.genericrepository.CassandraRepositoryHelper;
+import com.github.mayemsft.springdata.genericrepository.CassandraRepositoryHelper;
 
 /**
  * Hello world!
