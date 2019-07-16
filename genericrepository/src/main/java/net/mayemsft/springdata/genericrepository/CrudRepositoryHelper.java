@@ -9,7 +9,7 @@ public class CrudRepositoryHelper<T, ID> extends AbstractRepositoryHelper<T, ID>
 	@SuppressWarnings("unchecked")
 	public CrudRepositoryHelper(Class<T> cls, Class<ID> id,
 			ApplicationContext context) throws Exception {
-		super(cls, id, (Class<? extends Repository<T, ID>>) CrudRepository.class, context);
+		super(cls, id, CrudRepository.class, context);
 		// TODO Auto-generated constructor stub
 	}
 

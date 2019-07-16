@@ -15,7 +15,7 @@ public class CassandraRepositoryHelper<T, ID> extends AbstractRepositoryHelper<T
 	@SuppressWarnings("unchecked")
 	public CassandraRepositoryHelper(Class<T> cls, Class<ID> id,
 			ApplicationContext context) throws Exception {
-		super(cls, id, (Class<? extends Repository<T, ID>>) CassandraRepository.class, context);
+		super(cls, id, CassandraRepository.class, context);
 	}
 
 	/**

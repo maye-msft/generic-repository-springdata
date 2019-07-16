@@ -16,7 +16,7 @@ abstract class AbstractRepositoryHelper<T, ID> implements IRepositoryHelper<T, I
 	protected Class<ID> id;
 
 
-	protected AbstractRepositoryHelper(Class<T> cls, Class<ID> id, Class<? extends Repository<T, ID>> repoParent, ApplicationContext context) throws Exception {
+	protected AbstractRepositoryHelper(Class<T> cls, Class<ID> id, Class repoParent, ApplicationContext context) throws Exception {
 		this.cls = cls;
 		this.id = id;
 		this.repogenerator = new RepositoryInterfaceGenerator<T, ID>(repoParent, context);

@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.mayemsft.springdata</groupId>
-	<artifactId>genericrepository</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>springdata-genericrepository</artifactId>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>genericrepository</name>
@@ -97,13 +97,6 @@
 
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+
 
 </project>
