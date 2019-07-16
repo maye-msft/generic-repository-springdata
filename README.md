@@ -10,7 +10,7 @@ SpringData simplifies the data access by geneate the data access object(DAO) so 
 
 **In SpringData, we need define an interface as a DAO for each entity. If there are hundreds of entities, it needs to have the the same number of interfaces to be defined in java files. This project provide a generic repository then it is not required to define the interface any more.**
 
-There are two generic repositories,  [CrudRepositoryHelper]() and [CassandraRepositoryHelper]().
+There are two generic repositories,  [CrudRepositoryHelper](https://github.com/maye-msft/generic-repository-springdata/blob/master/genericrepository/src/main/java/com/github/mayemsft/springdata/genericrepository/CrudRepositoryHelper.java) and [CassandraRepositoryHelper](https://github.com/maye-msft/generic-repository-springdata/blob/master/genericrepository/src/main/java/com/github/mayemsft/springdata/genericrepository/CassandraRepositoryHelper.java).
 
 Here is a sample code using CrudRepositoryHelper
 
@@ -31,5 +31,5 @@ LOGGER.info(person1.toString());
 It shows the CrudRepositoryHelper make save and query function with Person entity, while there is no Person DAO interface defined.
 
 A full sample code is at the package com.github.mayemsft.springdata.genericrepository.sample;
-- [CrudApp]()
-- [CassandraApp]()
+- [CrudApp](https://github.com/maye-msft/generic-repository-springdata/blob/master/genericrepository/src/main/java/com/github/mayemsft/springdata/genericrepository/sample/CrudApp.java)
+- [CassandraApp](https://github.com/maye-msft/generic-repository-springdata/blob/master/genericrepository/src/main/java/com/github/mayemsft/springdata/genericrepository/sample/CassandraApp.java)
