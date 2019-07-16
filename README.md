@@ -33,3 +33,8 @@ It shows the CrudRepositoryHelper make save and query function with Person entit
 A full sample code is at the package com.github.mayemsft.springdata.genericrepository.sample;
 - [CrudApp](https://github.com/maye-msft/generic-repository-springdata/blob/master/genericrepository/src/main/java/com/github/mayemsft/springdata/genericrepository/sample/CrudApp.java)
 - [CassandraApp](https://github.com/maye-msft/generic-repository-springdata/blob/master/genericrepository/src/main/java/com/github/mayemsft/springdata/genericrepository/sample/CassandraApp.java)
+
+** TODO
+- unit test
+- document
+- publish to maven repository
