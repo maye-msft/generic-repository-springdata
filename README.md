@@ -10,7 +10,52 @@ SpringData simplifies the data access by geneate the data access object(DAO) so 
 
 **In SpringData, we need define an interface as a DAO (named repository) for each entity. If there are hundreds of entities, it needs to have the the same number of interfaces to be defined in java files. This project provide a generic repository then it is not required to define the interface any more.**
 
-### Implementation of Generic Repository
+
+
+### Implementation Detail.
+
+Firstly create a repository interface with code.
+
+```java
+StringBuilder sourceCode = new StringBuilder();
+sourceCode.append("import org.springframework.boot.autoconfigure.security.SecurityProperties.User;\n");
+sourceCode.append("import org.springframework.data.cassandra.repository.AllowFiltering;\n");
+sourceCode.append("import org.springframework.data.cassandra.repository.Query;\n");
+sourceCode.append("import org.springframework.data.repository.CrudRepository;\n");
+sourceCode.append("\n");
+sourceCode.append("public interface TestRepository extends CrudRepository<Entity, Long> {\n");
+sourceCode.append("}");
+```
+
+Compile the code and get the class, I use org.mdkt.compiler.InMemoryJavaCompiler
+
+```java
+ClassLoader classLoader = org.springframework.util.ClassUtils.getDefaultClassLoader();
+compiler = InMemoryJavaCompiler.newInstance();
+compiler.useParentClassLoader(classLoader);
+Class<?> testRepository = compiler.compile("TestRepository", sourceCode.toString());
+```		
+
+And initialize the repository in spring data runtime. this is a little tricky as I debug the SpringData code to find how it initialize a repository interface in spring.
+
+```java
+CassandraSessionFactoryBean bean = context.getBean(CassandraSessionFactoryBean.class);
+RepositoryFragments repositoryFragmentsToUse = (RepositoryFragments) Optional.empty().orElseGet(RepositoryFragments::empty); 
+CassandraRepositoryFactory factory = new CassandraRepositoryFactory(
+    new CassandraAdminTemplate(bean.getObject(), bean.getConverter()));
+factory.setBeanClassLoader(compiler.getClassloader());
+Object repository = factory.getRepository(testRepository, repositoryFragmentsToUse);
+```		
+
+Now you can try the save method of the repository.
+
+```java
+Method method = repository.getClass().getMethod("save", paramTypes);
+T obj = (T) method.invoke(repository, params.toArray());
+```		
+
+
+### Generic Repository
 
 There are two generic repositories,  [CrudRepositoryHelper](https://github.com/maye-msft/generic-repository-springdata/blob/master/genericrepository/src/main/java/com/github/mayemsft/springdata/genericrepository/CrudRepositoryHelper.java) and [CassandraRepositoryHelper](https://github.com/maye-msft/generic-repository-springdata/blob/master/genericrepository/src/main/java/com/github/mayemsft/springdata/genericrepository/CassandraRepositoryHelper.java).
 
