@@ -1,6 +1,6 @@
 # Generic Repository for SpringData
 ### Background - what is generic SpringData Reposistory
-SpringData simplifies the data access by geneate the data access object(DAO) so no more DAO implementation. Here is the Spring doc about it [spring persistence](https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa). 
+SpringData simplifies the data access by geneating the data access object(DAO) so no more DAO implementation. Here is the Spring doc about it [spring persistence](https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa). 
 
 *Spring Data takes this simplification one step forward and makes it possible to remove the DAO implementations entirely. The interface of the DAO is now **the only artifact that we need to explicitly define**.*
 
